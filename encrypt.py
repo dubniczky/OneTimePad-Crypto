@@ -25,12 +25,17 @@ if len(sys.argv) < 2:
 offset = int(sys.argv[1])
 print(f'Using offset: {sys.argv[1]}')
 
-message = input("Message: ")
+
+message = input("Message: ").encode('utf-8')
+msg_size = len(message)
+
+print(f'Message size: {msg_size} bytes')
+print(f'IMPORTANT! Never use key offset lower than {offset+msg_size} again.')
 
 print(f'Importing pad from: {pad_file}')
 pad = import_pad()
 print(f'Imported pad of: {len(pad)} bytes')
-enc = encrypt(message.encode('utf-8'), pad, offset)
+enc = encrypt(message, pad, offset)
 encstring = encode(enc)
 
 print(f'{"="*16}')
