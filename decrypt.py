@@ -11,27 +11,26 @@ def import_pad():
         pad = f.read()
     return base64.b64decode(pad)
 
-def encrypt(message, pad, offset=0):
+def decrypt(message, pad, offset=0):
     return bytes([message[i] ^ pad[(i + offset) % len(pad)] for i in range(len(message))])
 
-def encode(cipher):
-    return base64.b64encode(cipher).decode("utf-8")
+def decode(message):
+    return base64.b64decode(message.encode("utf-8"))
 
 
 # Require an offset
 if len(sys.argv) < 2:
-    print("Usage: python3 encrypt.py <offset>")
+    print("Usage: python3 decrypt.py <offset>")
     exit(1)
 offset = int(sys.argv[1])
 print(f'Using offset: {sys.argv[1]}')
 
-message = input("Message: ")
+message = input("Cipher (base64): ")
 
 print(f'Importing pad from: {pad_file}')
 pad = import_pad()
 print(f'Imported pad of: {len(pad)} bytes')
-enc = encrypt(message.encode('utf-8'), pad, offset)
-encstring = encode(enc)
+msg = decrypt(decode(message), pad, offset)
 
 print(f'{"="*16}')
-print(encstring)
+print(msg.decode('utf-8'))
