@@ -10,6 +10,8 @@ Because of this, we generate a larger key than we use to encrypt the message and
 
 $$
 c = m \oplus k \\
+$$
+$$
 c' = m' \oplus k \\
 $$
 
@@ -17,8 +19,14 @@ this means that
 
 $$
 c \oplus c' = m \oplus k \oplus m' \oplus k \\
+$$
+$$
 c \oplus c' = m \oplus m' \oplus k \oplus k \\
+$$
+$$
 c \oplus c' = m \oplus m' \oplus 0 \\
+$$
+$$
 c \oplus c' = m \oplus m' \\
 $$
 
