@@ -1,0 +1,7 @@
+__pycache__/
+.vscode/
+
+/secrets/*
+!/secrets/.gitkeep
+
+.DS_Store
